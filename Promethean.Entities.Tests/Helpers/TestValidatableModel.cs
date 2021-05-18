@@ -1,11 +1,12 @@
 using System;
 using Promethean.Entities.Models;
 using Promethean.Entities.Models.Configurations.Builders;
-using Promethean.Entities.Tests.Entities;
+using Promethean.Notifications;
+using Promethean.Notifications.Validators;
 
-namespace Promethean.Entities.Tests.Models
+namespace Promethean.Entities.Tests.Helpers
 {
-	public class TestModel : Model<TestEntity, TestModel>
+	public class TestValidatableModel : ValidatableModel<TestEntity, TestValidatableModel>
 	{
 		public Guid? Id { get; private set; }
 
@@ -19,7 +20,11 @@ namespace Promethean.Entities.Tests.Models
 
 		public void SetId(Guid id) => Id = id;
 
-		protected override void OnBuild(ModelConfigurationBuilder<TestEntity, TestModel> builder)
+		public override void Validate() => AddNotifications(new Validator().IsNotNullOrEmpty(Name, nameof(Name), NotificationMessage.NullOrEmpty)
+																	 .IsEmail(Email, nameof(Email), NotificationMessage.InvalidFormat)
+																	 .IsLowerThan(Birthdate ?? DateTime.Today, DateTime.Today, nameof(Birthdate), NotificationMessage.Invalid));
+
+		protected override void OnBuild(ModelConfigurationBuilder<TestEntity, TestValidatableModel> builder)
 		{
 			builder.EntityProperty(entity => entity.Id)
 		  		.HasModelProperty(model => model.Id);

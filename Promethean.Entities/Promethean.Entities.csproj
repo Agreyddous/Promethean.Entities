@@ -11,4 +11,8 @@
 	<Company>Nando VBMG</Company>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Promethean.Notifications" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>

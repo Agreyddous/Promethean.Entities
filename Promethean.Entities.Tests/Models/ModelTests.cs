@@ -1,6 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Promethean.Entities.Tests.Entities;
+using Promethean.Entities.Tests.Helpers;
 
 namespace Promethean.Entities.Tests.Models
 {

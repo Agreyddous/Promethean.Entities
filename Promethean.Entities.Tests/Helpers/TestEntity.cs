@@ -1,6 +1,6 @@
 using System;
 
-namespace Promethean.Entities.Tests.Entities
+namespace Promethean.Entities.Tests.Helpers
 {
 	public class TestEntity : IEntity<Guid>
 	{
