@@ -1,11 +1,12 @@
 using Promethean.Entities.Models.Configurations.Builders;
+using Promethean.Entities.Models.Contracts;
 using Promethean.Notifications;
 
 namespace Promethean.Entities.Models
 {
-	public abstract class Model<TEntity, TModel> : Notifiable
+	public abstract class Model<TEntity, TModel> : Notifiable, IModel<TEntity, TModel>
 		where TEntity : class, IEntity
-		where TModel : Model<TEntity, TModel>, new()
+		where TModel : class, IModel<TEntity, TModel>, new()
 	{
 		private ModelConfigurationBuilder<TEntity, TModel> _builder;
 
@@ -15,8 +16,8 @@ namespace Promethean.Entities.Models
 			OnBuild(_builder);
 		}
 
-		protected virtual TEntity Parse() => _builder.Parse(this as TModel);
-		protected virtual TModel Parse(TEntity entity) => _builder.Parse(entity);
+		public virtual TEntity Parse() => _builder.Parse(this as TModel);
+		public virtual TModel Parse(TEntity entity) => _builder.Parse(entity);
 
 		public static implicit operator Model<TEntity, TModel>(TEntity entity)
 		{
@@ -28,7 +29,7 @@ namespace Promethean.Entities.Models
 				model = model.Parse(entity);
 			}
 
-			return model;
+			return model as Model<TEntity, TModel>;
 		}
 
 		public static implicit operator TEntity(Model<TEntity, TModel> model)

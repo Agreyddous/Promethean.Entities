@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Promethean.Entities.Models.Configurations.Properties.Contracts;
+using Promethean.Entities.Models.Contracts;
 
 namespace Promethean.Entities.Models.Configurations.Properties
 {
 	public class ModelPropertyBuilder<TEntity, TModel, TEntityValue, TModelValue> : IModelPropertyBuilder<TEntity, TModel>
 		where TEntity : class, IEntity
-		where TModel : Model<TEntity, TModel>, new()
+		where TModel : IModel<TEntity, TModel>, new()
 	{
 		private readonly Expression<Func<TEntity, TEntityValue>> _entityProperty;
 		private Func<TEntity, TModelValue> _entityPropertyValue;

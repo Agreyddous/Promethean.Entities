@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Promethean.Notifications.Validators;
+using Promethean.Entities.Models.Contracts;
 
 namespace Promethean.Entities.Models
 {
-	public abstract class ValidatableModel<TEntity, TModel> : Model<TEntity, TModel>, IValidatable, IValidatableObject
+	public abstract class ValidatableModel<TEntity, TModel> : Model<TEntity, TModel>, IValidatableModel<TEntity, TModel>
 		where TEntity : class, IEntity
-		where TModel : ValidatableModel<TEntity, TModel>, new()
+		where TModel : class, IValidatableModel<TEntity, TModel>, new()
 	{
-		protected override TModel Parse(TEntity entity)
+		public override TModel Parse(TEntity entity)
 		{
 			TModel model = base.Parse(entity);
 			model.Validate();
