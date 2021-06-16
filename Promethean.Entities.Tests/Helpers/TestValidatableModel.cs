@@ -1,7 +1,7 @@
 using System;
 using Promethean.Entities.Models;
 using Promethean.Entities.Models.Configurations.Builders;
-using Promethean.Notifications;
+using Promethean.Notifications.Messages;
 using Promethean.Notifications.Validators;
 
 namespace Promethean.Entities.Tests.Helpers
