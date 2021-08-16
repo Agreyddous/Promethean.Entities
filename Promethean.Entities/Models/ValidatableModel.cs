@@ -23,7 +23,7 @@ namespace Promethean.Entities.Models
 		{
 			Validate();
 
-			return Notifications.Select(notification => new ValidationResult(notification.Message, new[] { notification.Property }));
+			return Notifications.SelectMany(notification => notification.Value.Select(message => new ValidationResult(message.Message, new[] { notification.Key })));
 		}
 	}
 }

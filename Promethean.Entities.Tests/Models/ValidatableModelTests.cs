@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Promethean.Entities.Tests.Helpers;
 
@@ -39,8 +40,7 @@ namespace Promethean.Entities.Tests.Models
 
 			ValidationContext validationContext = new ValidationContext(testValidatableModel);
 
-			testValidatableModel.Validate(validationContext);
-
+			Assert.AreEqual(3, testValidatableModel.Validate(validationContext).Count());
 			Assert.IsFalse(testValidatableModel.Valid);
 			Assert.AreEqual(3, testValidatableModel.Notifications.Count);
 		}

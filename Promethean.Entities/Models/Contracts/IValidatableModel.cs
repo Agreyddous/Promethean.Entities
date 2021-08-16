@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Promethean.Notifications.Validators;
+using Promethean.Notifications.Validators.Contracts;
 
 namespace Promethean.Entities.Models.Contracts
 {

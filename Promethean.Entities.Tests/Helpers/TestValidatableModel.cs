@@ -20,9 +20,9 @@ namespace Promethean.Entities.Tests.Helpers
 
 		public void SetId(Guid id) => Id = id;
 
-		public override void Validate() => AddNotifications(new Validator().IsNotNullOrEmpty(Name, nameof(Name), NotificationMessage.NullOrEmpty)
-																	 .IsEmail(Email, nameof(Email), NotificationMessage.InvalidFormat)
-																	 .IsLowerThan(Birthdate ?? DateTime.Today, DateTime.Today, nameof(Birthdate), NotificationMessage.Invalid));
+		public override void Validate() => AddNotifications(new PrometheanValidator().IsNotNullOrEmpty(Name, nameof(Name), NotificationMessage.NullOrEmpty)
+																			   .IsEmail(Email, nameof(Email), NotificationMessage.InvalidFormat)
+																			   .IsLowerThan(Birthdate ?? DateTime.Today, DateTime.Today, nameof(Birthdate), NotificationMessage.Invalid));
 
 		protected override void OnBuild(ModelConfigurationBuilder<TestEntity, TestValidatableModel> builder)
 		{
