@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using Promethean.Entities.Models.Contracts;
+using Promethean.Notifications.Extensions;
 
 namespace Promethean.Entities.Models
 {
@@ -23,7 +23,7 @@ namespace Promethean.Entities.Models
 		{
 			Validate();
 
-			return Notifications.SelectMany(notification => notification.Value.Select(message => new ValidationResult(message.Message, new[] { notification.Key })));
+			return Notifications.AsValidationResult();
 		}
 	}
 }
